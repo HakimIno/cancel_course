@@ -55,13 +55,12 @@ pipelines:
           name: Deploy to Production
           deployment: Production
           script:
-            - export IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
             - pipe: atlassian/ssh-run:0.2.2
               variables:
                 SSH_USER: $SSH_USER
                 SERVER: $SSH_SERVER
                 COMMAND: >
-                  docker run -d $IMAGE
+                  docker run -d "${IMAGE}:${VERSION}"
 
           services:
             - docker
