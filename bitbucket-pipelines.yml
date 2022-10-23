@@ -46,7 +46,7 @@ pipelines:
             - IMAGE_NAME=$BITBUCKET_REPO_SLUG
             - docker load --input "${IMAGE_NAME}.tar"
             - VERSION="prod-0.1.${BITBUCKET_BUILD_NUMBER}"
-            - IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
+            - export IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
             - docker tag "${IMAGE_NAME}" "${IMAGE}:${VERSION}"
             - docker push "${IMAGE}:${VERSION}"
           services:
@@ -55,12 +55,13 @@ pipelines:
           name: Deploy to Production
           deployment: Production
           script:
+            - export IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
             - pipe: atlassian/ssh-run:0.2.2
               variables:
                 SSH_USER: $SSH_USER
                 SERVER: $SSH_SERVER
-                COMMAND: 'ls'
-                DEBUG: 'true'
+                COMMAND: >
+                  docker run -d $IMAGE
 
           services:
             - docker
