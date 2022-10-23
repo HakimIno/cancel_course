@@ -63,6 +63,7 @@ pipelines:
                 SSH_USER: $SSH_USER
                 SERVER: $SSH_SERVER
                 COMMAND: >
+                  docker stop $CONTAINER_TO_STOP
                   docker run -d "${IMAGE}:${VERSION}"
 
           services:
