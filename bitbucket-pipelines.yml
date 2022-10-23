@@ -59,7 +59,7 @@ pipelines:
               variables:
                 SSH_USER: $SSH_USER
                 SERVER: $SSH_SERVER
-                COMMAND: 'git status'
+                COMMAND: 'ls'
                 DEBUG: 'true'
 
           services:
