@@ -59,6 +59,7 @@ pipelines:
               variables:
                 SSH_USER: $SSH_USER
                 SERVER: $SSH_SERVER
+                SSH_KEY: $SSH_KEY
                 COMMAND: >
                   docker pull "${IMAGE}:${VERSION}"
                   docker run -d  "${IMAGE}:${VERSION}"
