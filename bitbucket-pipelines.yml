@@ -58,7 +58,8 @@ pipelines:
             - pipe: atlassian/ssh-run:0.2.2
               variables:
                 SSH_USER: 'root'
-                SSH_SERVER: 165.22.61.239
+                SSH_SERVER: $SSH_KEY
+                SERVER: 165.22.61.239
                 COMMAND: >
                   docker pull "${IMAGE}:${VERSION}"
                   docker run -d  "${IMAGE}:${VERSION}"
