@@ -64,7 +64,7 @@ pipelines:
                 SERVER: $SSH_SERVER
                 COMMAND: >
                   docker stop $CONTAINER_TO_STOP
-                  docker run -d "${IMAGE}:${VERSION}"
+                  docker run -d -p 80:80 "${IMAGE}:${VERSION}"
 
           services:
             - docker
