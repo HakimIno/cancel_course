@@ -59,9 +59,8 @@ pipelines:
               variables:
                 SSH_USER: $SSH_USER
                 SERVER: $SSH_SERVER
-                COMMAND: >
-                  docker pull pratya240960/client-v2-petition:prod-0.1.12
-                  docker run -d pratya240960/client-v2-petition:prod-0.1.12
+                COMMAND: 'git status'
+                DEBUG: 'true'
 
           services:
             - docker
