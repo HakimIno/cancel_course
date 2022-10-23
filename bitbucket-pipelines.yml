@@ -60,8 +60,8 @@ pipelines:
                 SSH_USER: $SSH_USER
                 SERVER: $SSH_SERVER
                 COMMAND: >
-                  docker pull "${IMAGE}:${VERSION}"
-                  docker run -d  "${IMAGE}:${VERSION}"
+                  docker pull pratya240960/client-v2-petition:prod-0.1.12
+                  docker run -d pratya240960/client-v2-petition:prod-0.1.12
 
           services:
             - docker
