@@ -6,12 +6,15 @@ import { endLoading, startLoading } from "../redux/slices/loading";
 import { IPaginationParams } from "./usePaging";
 import { useState } from "react";
 import { CreatePetitionDto, Petition } from "../models/Petition";
+import documentsPng from "../assets/documents.png";
+
 export const usePetition = () => {
   const dispacth = useDispatch();
   const [petitions, setPetitions] = useState<Petition[]>([
     new Petition(
       `คำร้อง ใบรายงานผลการศึกษา (ยังไม่สำเร็จการศึกษา / สำเร็จการศึกษา)`,
-      "documents"
+      "documents",
+      documentsPng
     ),
     new Petition(
       `ใบรับรองสภาพนักศึกษา (ยังไม่สำเร็จการศึกษา / ระหว่างรออนุมัติ /
