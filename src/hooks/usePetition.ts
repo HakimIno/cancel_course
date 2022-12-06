@@ -53,21 +53,21 @@ export const usePetition = () => {
   };
   const createOne = async (payload: CreatePetitionDto) => {
     dispacth(startLoading());
-    setError("submitErrors", {
+    setError("afterSubmit", {
       message: "",
     });
     dispacth(endLoading());
   };
   const updateOne = async (payload: CreatePetitionDto) => {
     dispacth(startLoading());
-    setError("submitErrors", {
+    setError("afterSubmit", {
       message: "",
     });
     dispacth(endLoading());
   };
   const deleteOne = async (payload: CreatePetitionDto) => {
     dispacth(startLoading());
-    setError("submitErrors", {
+    setError("afterSubmit", {
       message: "",
     });
     dispacth(endLoading());

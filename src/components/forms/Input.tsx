@@ -15,7 +15,7 @@ const Input: React.FC<{
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <div className="field">
+        <div className="">
           <label htmlFor={name + "-label"} className="block">
             {label}
           </label>
@@ -23,7 +23,7 @@ const Input: React.FC<{
             {...field}
             {...props}
             id={name + "-id"}
-            className={`block w-full ${!!error?.message && "p-invalid"}`}
+            className={`block w-full ${!!error?.message && "p-invalid"} m-0`}
           />
           {error?.message && (
             <small id={name + "-error"} className="block p-error">
