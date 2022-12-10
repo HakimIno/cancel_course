@@ -22,3 +22,7 @@ export const PATH_APP = {
   page404: path("/", "404"),
   page500: path("/", "500"),
 };
+
+export const PATH_APPROVER = {
+  home: path("/", "approver"),
+}
