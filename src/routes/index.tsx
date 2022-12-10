@@ -38,6 +38,15 @@ export default function Router() {
       children: [
         { index: true, element: <HomePage /> },
         {
+          path: "approver",
+          children: [
+            {
+              index: true,
+              element: <ApproverHomePage />,
+            },
+          ],
+        },
+        {
           path: "documents",
           children: [
             {
@@ -139,4 +148,10 @@ export const CreateTranferPage = Loadable(
 export const FormPage = Loadable(lazy(() => import("../pages/form")));
 export const CreateFormPage = Loadable(
   lazy(() => import("../pages/form/CreateDocForm"))
+);
+
+//approver
+
+export const ApproverHomePage = Loadable(
+  lazy(() => import("../pages/approver/HomePage"))
 );
