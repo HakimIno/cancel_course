@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Sign from "../../components/papers/Sign";
 import ApproveCard from "../../components/papers/ApproveCard";
 import { Study } from "../../components/papers/Study";
@@ -9,9 +9,22 @@ import { Button } from "primereact/button";
 const CreateDocForm = () => {
   const { handlePrint, componentRef } = usePrint();
   const params = useParams();
+  const location = useLocation();
+  console.log(location);
+  
+  const paymentMethod = location.search.slice(-1) as "1" | "2";
+  const PaymentMethod = () => {
+    if (paymentMethod === "1") {
+      return <div>โอนเข้าบัญชี
+        <p>เลขบัญชี 1 12323</p>
+      </div>;
+    }
+    return <div>ชำระด้วยตนเอง</div>;
+  };
+
   return (
     <div className=" flex justify-content-center flex-column align-items-center">
-      <div className="flex justify-content-end py-2">
+      <div className="flex flex-column justify-content-end py-2">
         <Button
           icon={"pi pi-print"}
           label="Print"
@@ -49,6 +62,10 @@ const CreateDocForm = () => {
           <b>มีความประสงค์ยื่นขอเอกสาร</b>
           <div className="pl-3">เอกสาร {params.petitionId}</div>
         </div>
+        <div>
+          <b>จำนวนเงิน</b>
+          <div className="pl-3">100</div>
+        </div>
         {/* 4 */}
         <Sign role="นักศึกษา" className="mt-5" />
         {/* 5 */}
@@ -58,6 +75,7 @@ const CreateDocForm = () => {
         </div>
         {/* 6 */}
         <Sign role="งานทะเบียน" className="mt-5" />
+        {PaymentMethod()}
       </div>
     </div>
   );

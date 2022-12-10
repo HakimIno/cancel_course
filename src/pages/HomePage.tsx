@@ -42,6 +42,11 @@ const card_topics: CardTopicProps[] = [
     path: "form",
     icon: registrationFormPng,
   },
+  {
+    title: "ตรวจสอบคำร้อง",
+    path: "check",
+    icon: registrationFormPng,
+  },
 ];
 const std_informations: ISTDInformation[] = [
   { label: "รหัสนักศึกษา" },

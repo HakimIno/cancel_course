@@ -5,11 +5,13 @@ export class Petition {
   name: string;
   picture?: string;
   type: PetitionType;
-  constructor(name = "", type: PetitionType, picture?: string) {
+  price: number;
+  constructor(name = "", type: PetitionType, picture?: string, price = 50) {
     this.id = name.length;
     this.name = name;
     this.type = type;
     this.picture = picture;
+    this.price = price;
   }
 }
 export class CreatePetitionDto extends ModelDto {

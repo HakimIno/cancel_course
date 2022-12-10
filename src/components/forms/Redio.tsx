@@ -7,15 +7,14 @@ const Redio: React.FC<{
   props?: RadioButtonProps;
   options: { value: string; label: string }[];
   veticle?: boolean;
-}> = ({ options, name, props, veticle }) => {
+  onChange: (value: string) => void;
+}> = ({ options, name, props, veticle, onChange }) => {
   const { control } = useFormContext();
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => {
-        console.log(field);
-
         return (
           <div
             id="redio"
@@ -33,7 +32,10 @@ const Redio: React.FC<{
                   value={opt.value}
                   name={field.name}
                   onBlur={field.onBlur}
-                  onChange={field.onChange}
+                  onChange={(e) => {
+                    field.onChange(e)
+                    onChange(opt.value)
+                  }}
                   checked={field.value === opt.value}
                 />
                 <label htmlFor={opt.value}>{opt.label}</label>

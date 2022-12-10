@@ -63,6 +63,15 @@ export default function Router() {
             },
           ],
         },
+        {
+          path: "check",
+          children: [
+            {
+              index: true,
+              element: <CheckPage />,
+            },
+          ],
+        },
         { path: "graduate", element: <>graduate</> },
         { path: "qualifications", element: <>qualifications</> },
         {
@@ -128,6 +137,8 @@ export default function Router() {
 // AUTHENTICATION
 export const Login = Loadable(lazy(() => import("../pages/auth/Login")));
 export const HomePage = Loadable(lazy(() => import("../pages/HomePage")));
+
+export const CheckPage = Loadable(lazy(() => import("../pages/checks")));
 
 // Document
 export const DocumentPage = Loadable(lazy(() => import("../pages/documents")));

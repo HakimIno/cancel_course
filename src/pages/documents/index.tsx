@@ -6,10 +6,11 @@ import Input from "../../components/forms/Input";
 import Redio from "../../components/forms/Redio";
 import { useActivity } from "../../hooks/useActivity";
 import { usePetition } from "../../hooks/usePetition";
-
 const DocumentPage = () => {
   const { methods, createOne, handleSubmit, errors, itemFields, petitions } =
     useActivity();
+
+  const [paymentMethod, setPaymentMethod] = useState<string>("1");
   return (
     <div className="m-3 p-3 border-round bg-white">
       {/* <OrderPetitionTable />
@@ -28,9 +29,13 @@ const DocumentPage = () => {
               <b>ชื่อ - สกุล: </b>
               <span>นายปรัชญา มณีโชติ</span>
             </div>
-            <div className=" col-12">
+            <div className=" col-6">
               <b>สาขาวิชา: </b>
               <span>วิศวกรรมซอฟต์แวร์</span>
+            </div>
+            <div className=" col-6">
+              <b>สถานะนักศึกษา: </b>
+              <span>กำลังศึกษาอยู่</span>
             </div>
           </div>
         </div>
@@ -81,6 +86,7 @@ const DocumentPage = () => {
                       value: "POSTAL",
                     },
                   ]}
+                  onChange={() => {}}
                   name={"channal_receiving"}
                 />
               </div>
@@ -99,30 +105,44 @@ const DocumentPage = () => {
                 },
               ]}
               name={"payment"}
+              onChange={(val) => {
+                setPaymentMethod(val);
+                console.log({ val });
+              }}
             />
             <b>เลือกเอกสารที่ต้องการขอ</b>
             <div className="flex flex-column gap-2 py-2">
-              {itemFields.map((item, i) => (
-                <div key={item.id}>
-                  <div className="flex align-items-center gap-3">
-                    <div style={{ width: 50 }} className="text-center">
-                      <Input
-                        name={`items.${i}.quantity`}
-                        props={{ type: "number", min: 0 }}
-                      />
-                      {/* <small>จำนวน</small> */}
+              {itemFields.map((item, i) => {
+                const petition = petitions.find(
+                  (p) => p.id === item.petition_id
+                );
+                return (
+                  <div key={item.id}>
+                    <div className="flex align-items-center gap-3">
+                      <div style={{ width: 50 }} className="text-center">
+                        <Input
+                          name={`items.${i}.quantity`}
+                          props={{ type: "number", min: 0 }}
+                        />
+                        {/* <small>จำนวน</small> */}
+                      </div>
+                      <span>
+                        {petition?.name} <b>ฉบับละ</b> {petition?.price}
+                      </span>
                     </div>
-                    <span>
-                      {petitions.find((p) => p.id === item.petition_id)?.name}
-                    </span>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
+
+            <b>ราคารวม</b>: 300
           </div>
         </FormProvider>
         <div className=" mt-4">
-          <Link to={`1/create`} className="no-underline">
+          <Link
+            to={`1/create?payment=${paymentMethod}`}
+            className="no-underline"
+          >
             <Button label="ยื่นคำร้องขอเอกสารทางศึกษา" />
           </Link>
         </div>

@@ -21,7 +21,6 @@ export const usePetition = () => {
             สำเร็จการศึกษา)`,
       "documents"
     ),
-    new Petition(`อื่น ๆ`, "documents"),
   ]);
   const [petition, setPetition] = useState<Petition | null>(null);
   const LoginSchema = Yup.object().shape({
