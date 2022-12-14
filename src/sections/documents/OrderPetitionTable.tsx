@@ -60,7 +60,7 @@ const OrderPetitionTable = () => {
 
   return (
     <div>
-      <div className=" flex justify-content-between">
+      <div className="flex justify-content-between">
         <div></div>
         <InputText
           placeholder="ค้นหา"
@@ -84,7 +84,7 @@ const OrderPetitionTable = () => {
         sortOrder={pagingOption.orderBy}
         onSort={pagingOption.onSort}
       >
-        <Column field="id" header="หมายเลขติดตาม"></Column>
+        <Column field="id" header="หมายเลขติดตาม" className=""></Column>
         <Column field="petition.name" header="คำร้อง"></Column>
         <Column field="createdAt" header="วันที่ยื่นคำร้อง"></Column>
         <Column

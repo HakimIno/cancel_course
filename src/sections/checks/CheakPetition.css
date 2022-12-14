@@ -1,0 +1,19 @@
+ 
+
+.button-demo .template .p-button.print {
+    background: linear-gradient(to left, var(--yellow-400) 50%, var(--yellow-500) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #000;
+    border-color: var(--yellow-500);
+}
+.button-demo .template .p-button.print:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.print i {
+    background-color: var(--yellow-500);
+}
+.button-demo .template .p-button.print:focus {
+    box-shadow: 0 0 0 1px var(--yellow-200);
+}

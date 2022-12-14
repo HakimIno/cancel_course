@@ -21,8 +21,11 @@ export const usePetition = () => {
             สำเร็จการศึกษา)`,
       "documents"
     ),
+    
+    
   ]);
   const [petition, setPetition] = useState<Petition | null>(null);
+
   const LoginSchema = Yup.object().shape({
     name: Yup.string().required(),
   });

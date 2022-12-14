@@ -1,4 +1,6 @@
 import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import FormProvider from "../../components/forms/FormProvider";
@@ -6,11 +8,70 @@ import Input from "../../components/forms/Input";
 import Redio from "../../components/forms/Redio";
 import { useActivity } from "../../hooks/useActivity";
 import { usePetition } from "../../hooks/usePetition";
+import { InputNumber, InputNumberChangeParams } from "primereact/inputnumber";
+
+
 const DocumentPage = () => {
   const { methods, createOne, handleSubmit, errors, itemFields, petitions } =
     useActivity();
 
   const [paymentMethod, setPaymentMethod] = useState<string>("1");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [displayBasic, setDisplayBasic] = useState<boolean>(false);
+  const [position, setPosition] = useState<string>("center");
+  const [inputValues, setInputValues] = useState<number[]>([]);
+
+  const resultInput = inputValues.reduce((a, b) => a + b, 0)
+
+  const result = resultInput * 50
+
+  const onClick = () => {
+    setDisplayBasic(true);
+
+    if (position) {
+      setPosition(position);
+    }
+  };
+
+  const onHide = () => {
+    setDisplayBasic(false);
+  };
+
+  const handleChange = (
+    i: number | null,
+    event: InputNumberChangeParams
+  ) => {
+    
+      const newInputValues: number[] | null = [...inputValues];
+      newInputValues[i] = event.value;
+      setInputValues(newInputValues);
+
+  };
+
+
+  const renderFooter = () => {
+    return (
+      <div>
+        <Button
+          label="ยกเลิก"
+          icon="pi pi-times"
+          onClick={() => onHide()}
+          className="p-button-text"
+        />
+        <Link to={`1/create?payment=${paymentMethod}`} className="no-underline">
+          <Button
+            label="ยืนยัน"
+            icon="pi pi-check"
+            onClick={() => onHide()}
+            autoFocus
+          />
+        </Link>
+      </div>
+    );
+  };
+
   return (
     <div className="m-3 p-3 border-round bg-white">
       {/* <OrderPetitionTable />
@@ -54,6 +115,8 @@ const DocumentPage = () => {
                   label={"เบอร์โทรศัพท์"}
                   name={"phone"}
                   props={{ type: "text" }}
+                  valueProps={phoneNumber}
+                  onChangeProps={setPhoneNumber}
                 />
               </div>
               <div className="col-6">
@@ -61,6 +124,8 @@ const DocumentPage = () => {
                   label={"อีเมลล์"}
                   name={"email"}
                   props={{ type: "email" }}
+                  valueProps={email}
+                  onChangeProps={setEmail}
                 />
               </div>
               <div className="col-12">
@@ -68,6 +133,8 @@ const DocumentPage = () => {
                   label={"ที่อยู่"}
                   name={"email"}
                   props={{ type: "email" }}
+                  valueProps={address}
+                  onChangeProps={setAddress}
                 />
               </div>
               <div className="col-12">
@@ -118,33 +185,49 @@ const DocumentPage = () => {
                 );
                 return (
                   <div key={item.id}>
-                    <div className="flex align-items-center gap-3">
-                      <div style={{ width: 50 }} className="text-center">
-                        <Input
-                          name={`items.${i}.quantity`}
-                          props={{ type: "number", min: 0 }}
-                        />
-                        {/* <small>จำนวน</small> */}
-                      </div>
-                      <span>
-                        {petition?.name} <b>ฉบับละ</b> {petition?.price}
-                      </span>
+                    <div className="field col-12 md:col-3">
+                      <label htmlFor="minmax-buttons">
+                        {petition?.name} {petition?.price}
+                      </label>
+                    
+                        <InputNumber
+                          inputId="minmax-buttons"
+                          value={inputValues[i]}
+                          key={i}
+                          onChange={(event) => handleChange(i, event)}
+                          mode="decimal"
+                          showButtons
+                          min={0}
+                          max={10}
+                        />;
+                    
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <b>ราคารวม</b>: 300
+            <span>ราคารวมทั้งหมด: {result} บาท</span>
           </div>
         </FormProvider>
-        <div className=" mt-4">
-          <Link
-            to={`1/create?payment=${paymentMethod}`}
-            className="no-underline"
+        <div className="card mt-4">
+          <Button
+            label="ยื่นคำร้องขอเอกสารทางศึกษา"
+            onClick={() => onClick()}
+          />
+          <Dialog
+            header="Header"
+            visible={displayBasic}
+            onHide={() => onHide()}
+            breakpoints={{ "960px": "75vw" }}
+            style={{ width: "50vw"  }}
+            footer={renderFooter()}
           >
-            <Button label="ยื่นคำร้องขอเอกสารทางศึกษา" />
-          </Link>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            </p>
+          </Dialog>
         </div>
       </div>
     </div>

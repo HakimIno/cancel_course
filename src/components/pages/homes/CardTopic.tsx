@@ -8,8 +8,8 @@ export interface CardTopicProps {
 }
 const CardTopic: React.FC<CardTopicProps> = ({ title, path, icon }) => {
   return (
-    <Link to={path} className="no-underline text-gray-600">
-      <div className="h-16rem flex justify-content-center">
+    <Link to={path} className="no-underline text-gray-600 ">
+      <div className="h-16rem flex justify-content-center font-bold m-2 flex align-items-center ">
         <div className="grid justify-content-center w-19rem">
           <div className=" flex justify-content-center align-items-center">{icon && <img src={icon} className=" h-9rem" alt={title} />}</div>
           <b className="no-underline col-12 text-center"> {title}</b>

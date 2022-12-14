@@ -1,5 +1,9 @@
-import { DataTable, DataTablePFSEvent, DataTableSortOrderType } from 'primereact/datatable';
-import React from 'react';
+import {
+  DataTable,
+  DataTablePFSEvent,
+  DataTableSortOrderType,
+} from "primereact/datatable";
+import React from "react";
 // import { LogClient } from 'src/hooks/clientLogsHook';
 // import { Group } from 'src/hooks/groupHook';
 // import { License } from 'src/hooks/licenseHook';
@@ -33,24 +37,27 @@ const CustomTable: React.FC<{
 }) => {
   return (
     <DataTable
-      size='small'
+     /*  size="large" */
       value={items}
-      paginator
-      rows={rows}
-      totalRecords={totalRecords}
-      lazy
-      first={first}
-      onPage={onPage}
-      responsiveLayout={'scroll'}
+      //paginator
+     /*  rows={rows} */
+      /* totalRecords={totalRecords} */
+   /*    lazy */
+     /*  first={first} */
+      /* onPage={onPage} */
+      responsiveLayout={"scroll"}
       // scrollable
-      scrollHeight='65vh'
-      paginatorClassName='justify-content-end'
+      /* scrollable */
+     /*  scrollHeight="flex" */
+      paginatorClassName="justify-content-end"
       rowsPerPageOptions={rowsPerPage}
-      paginatorTemplate='CurrentPageReport RowsPerPageDropdown FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink'
-      currentPageReportTemplate='Showing {first} to {last} of {totalRecords}'
+      paginatorTemplate="CurrentPageReport RowsPerPageDropdown FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
       sortField={sortField}
       sortOrder={sortOrder}
       onSort={onSort}
+      /* resizableColumns */
+      showGridlines
     >
       {children}
     </DataTable>
